@@ -1,0 +1,145 @@
+//the func recieve string and returns string but evry two letters are reversed
+        public static string ReversTwoLetters(string str) {
+            string str1 = "";
+            for (int i = 0; i < str.Length; i++) {
+                if (i % 2 == 0)
+                    str1 += str[i + 1];
+                else
+                    str1 += str[i - 1];
+            }
+            return str1;
+        }
+        //the func recieve string and returns count of small letters in string
+        public static int CountOfSmallLetters(string str) {
+            int count = 0;
+            for (char i = 'a'; i <= 'z'; i++) {
+                if (str.IndexOf(i) != -1)
+                    count++;
+            }
+            return count;
+        }
+        //the func recieve string than returns the count of chars, like, #$%^
+        public static int CountOfChars(string str) {
+            int count = 0;
+            for (int j = 0; j < str.Length; j++){
+                if ((str[j] >= 'a' && str[j] <= 'z') || (str[j] >= 'A' && str[j] <= 'Z'))
+                    count++;
+            }
+            return str.Length - count;
+        }
+        //the func recieve string and returns same string but second half is in the start
+        public static string NewString(string str) {
+            if (str.Length % 2 == 0)
+                return str.Substring(str.Length/2, str.Length/2) + str.Substring(0,str.Length/2);
+            else
+                return str[str.Length - 1] + str.Substring(str.Length / 2, str.Length / 2) + str.Substring(0, str.Length / 2);
+        }
+        //the func recieve two string and return a new string that same as well with first string but without first showing of second string
+        public static string WithoutS(string s1, string s2) {
+            string s = "";
+            int count = 0;
+            while (count == 0) {
+                int startIndex = s1.IndexOf(s2);
+                s += s1.Remove(startIndex, s2.Length);
+                count++;
+            }
+            return s;
+        }
+        //the func count the words in the string
+        public static int CountOfWords(string str) {
+            int count = 0;
+            for (int i = 0; i < str.Length; i++) {
+                if (str[i] != ' ')
+                    count++;
+            }
+            return count;
+        }
+        //the func recieve a string and revrse the word
+        public static string ReversWord(string str) {
+            string str1 = "";
+            for (int i = str.Length - 1;i >= 0;i--) {
+                str1 += str[i];
+            }
+            return str1;
+        }
+        //the func recieve a string and returns same string but every word is reversed
+        public static string ReverseSentence(string str) {
+            int from = 0; int index = 0; int endIndex = 0; int count = 0;
+            string s = "";
+            while (str.IndexOf(" ", from) != -1 ||
+                str.Substring(from).Length > 0) { 
+                count = 0;
+                endIndex = str.IndexOf(" ", from) == -1 ? str.Length : str.IndexOf(" ", from);
+                for (int i = from; i < endIndex; i++)
+                    count++;                    
+                s += ReversWord(str.Substring(from, count));
+                from = str.IndexOf(" ", from) == -1 ? str.Length : str.IndexOf(" ", from) + 1;
+                s += " ";
+            }
+            return s;
+        }
+        static void Main(string[] args)
+        {
+            ///q1
+            //1. 1
+            //2. abcde
+            //3. מטרת הפעולה לבדוק אחת מהאותיות קיימת במחרוזת שאנחנו לקבל ואם כן אז אנחנו מוסיפים 1 לסופר האותיות שלנו
+            //   הפעולה מחזירה את הסופר האותיות
+            //4. 26
+
+            ///q2
+            string str2 = "fish";
+            Console.WriteLine(ReversTwoLetters(str2));
+
+            ///q3
+            string str3 = "abcdf";
+            Console.WriteLine(CountOfSmallLetters(str3));
+
+            ///q4
+            string str4 = "df@#$*^g";
+            Console.WriteLine(CountOfChars(str4));
+
+            ///q5
+            string str5 = "abcdefq";
+            Console.WriteLine(NewString(str5));
+
+            ///q6
+            string str6 = "abcdefasdhkfbudef";
+            string s = "def";
+            Console.WriteLine(WithoutS(str6,s));
+
+            ///q7
+            Console.WriteLine("Enter a sentence: ");
+            string str7 = Console.ReadLine();
+            Console.WriteLine(CountOfWords(str7));
+
+            ///q8
+            Console.WriteLine("Enter a sentence: ");
+            string str8 = Console.ReadLine();
+            //string str8 = "word by word";
+            Console.WriteLine(ReverseSentence(str8));
+
+            ///q9
+            int place = 0; int minCount = 123456;
+            string str9 = "0";string minS = "0";
+            while (str9 != "") {
+                Console.WriteLine("Enter a string: ");
+                str9 = Console.ReadLine();
+                for (int i = 0; i < str9.Length; i++)
+                {
+                    if (str9.Length < minCount && str9.Substring(0, 3) == "abc"){
+                        minCount = str9.Length;
+                        minS = str9;
+                    }
+                }
+                place++;
+            }
+            Console.WriteLine("The shortest string is " + minS + $"\nThe length is {minCount}");
+            
+            ///10
+            //הפעולה תחזיר
+            //adi*getc*at
+            //מטרת הפעולה היא לשים כוכביות אחרי כל ארבע אינדקסים
+            //בנוסף היא מתחילה לספור את האינדקסים מאינדקס 3
+
+            Console.ReadLine();
